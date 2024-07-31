@@ -1,0 +1,56 @@
+<html><head><base href="https://ashsgame.com"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>2D Platformer with Math Questions</title><style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #87CEEB;
+    }
+    #gameCanvas {
+      display: block;
+    }
+    #mathQuestion {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+      text-align: center;
+    }
+    #mathQuestion input {
+      margin-top: 10px;
+      padding: 5px;
+    }
+    #mathQuestion button {
+      margin-top: 10px;
+      padding: 5px 10px;
+    }
+  </style></head><body>
+  <canvas id="gameCanvas"></canvas>
+  <div id="mathQuestion">
+    <p id="question"></p>
+    <input type="number" id="answer">
+    <button onclick="checkAnswer()">Submit</button>
+  </div>
+  <script>
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  // Game objects
+  const player = {
+    x: 50,
+    y: canvas.height - 100,
+    width: 40,
+    height: 60,
+    speed: 6,
+    jumpForce: 17,
+    velocityY: 0,
+    isJumping: false,
+    jumpCount: 0,
+    maxJumps: 2
+  };
