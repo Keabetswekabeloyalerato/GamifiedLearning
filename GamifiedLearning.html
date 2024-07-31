@@ -116,3 +116,41 @@ const trees = [
   { x: 3800, y: canvas.height - 40, size: 110 },
   { x: 4200, y: canvas.height - 40, size: 90 }
 ];
+
+const mountains = [
+  { x: 0, height: canvas.height * 0.6 },
+  { x: canvas.width * 0.3, height: canvas.height * 0.5 },
+  { x: canvas.width * 0.6, height: canvas.height * 0.7 },
+  { x: canvas.width * 0.9, height: canvas.height * 0.55 },
+  { x: canvas.width * 1.2, height: canvas.height * 0.65 },
+  { x: canvas.width * 1.5, height: canvas.height * 0.5 },
+  { x: canvas.width * 1.8, height: canvas.height * 0.7 },
+  { x: canvas.width * 2.1, height: canvas.height * 0.6 },
+  { x: canvas.width * 2.4, height: canvas.height * 0.55 },
+  { x: canvas.width * 2.7, height: canvas.height * 0.65 },
+  { x: canvas.width * 3.0, height: canvas.height * 0.5 },
+  { x: canvas.width * 3.3, height: canvas.height * 0.7 },
+  { x: canvas.width * 3.6, height: canvas.height * 0.6 },
+  { x: canvas.width * 3.9, height: canvas.height * 0.55 }
+];
+
+const enemies = [
+  { x: 600, y: canvas.height - 100, width: 40, height: 40, speed: 1.5, direction: 1, alive: true, initialX: 600, initialY: canvas.height - 100 },
+  { x: 1200, y: canvas.height - 260, width: 40, height: 40, speed: 1.5, direction: 1, alive: true, initialX: 1200, initialY: canvas.height - 260 },
+  { x: 1800, y: canvas.height - 340, width: 40, height: 40, speed: 1.5, direction: 1, alive: true, initialX: 1800, initialY: canvas.height - 340 },
+  { x: 2400, y: canvas.height - 220, width: 40, height: 40, speed: 1.5, direction: 1, alive: true, initialX: 2400, initialY: canvas.height - 220 },
+  { x: 3000, y: canvas.height - 300, width: 40, height: 40, speed: 1.5, direction: 1, alive: true, initialX: 3000, initialY: canvas.height - 300 },
+  { x: 3600, y: canvas.height - 260, width: 40, height: 40, speed: 1.5, direction: 1, alive: true, initialX: 3600, initialY: canvas.height - 260 },
+  { x: 4200, y: canvas.height - 380, width: 40, height: 40, speed: 1.5, direction: 1, alive: true, initialX: 4200, initialY: canvas.height - 380 }
+];
+
+const coins = [
+  { x: 300, y: canvas.height - 150, collected: false },
+  { x: 800, y: canvas.height - 250, collected: false },
+  { x: 1400, y: canvas.height - 350, collected: false },
+  { x: 2000, y: canvas.height - 300, collected: false },
+  { x: 2600, y: canvas.height - 200, collected: false },
+  { x: 3200, y: canvas.height - 400, collected: false },
+  { x: 3800, y: canvas.height - 300, collected: false },
+  { x: 4400, y: canvas.height - 250, collected: false }
+];
