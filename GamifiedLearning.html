@@ -1,63 +1,61 @@
 <html><head><base href="https://ashsgame.com"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>2D Platformer with Math Questions</title><style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: #87CEEB;
-    }
-    #gameCanvas {
-      display: block;
-    }
-    #mathQuestion {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 20px;
-      border-radius: 10px;
-      display: none;
-      text-align: center;
-    }
-    #mathQuestion input {
-      margin-top: 10px;
-      padding: 5px;
-    }
-    #mathQuestion button {
-      margin-top: 10px;
-      padding: 5px 10px;
-    }
-  </style></head><body>
-  <canvas id="gameCanvas"></canvas>
-  <div id="mathQuestion">
-    <p id="question"></p>
-    <input type="number" id="answer">
-    <button onclick="checkAnswer()">Submit</button>
-  </div>
-  <script>
-  const canvas = document.getElementById('gameCanvas');
-  const ctx = canvas.getContext('2d');
-  
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  
-  // Game objects
-  const player = {
-    x: 50,
-    y: canvas.height - 100,
-    width: 40,
-    height: 60,
-    speed: 6,
-    jumpForce: 17,
-    velocityY: 0,
-    isJumping: false,
-    jumpCount: 0,
-    maxJumps: 2
-  };
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #87CEEB;
+  }
+  #gameCanvas {
+    display: block;
+  }
+  #mathQuestion {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+    text-align: center;
+  }
+  #mathQuestion input {
+    margin-top: 10px;
+    padding: 5px;
+  }
+  #mathQuestion button {
+    margin-top: 10px;
+    padding: 5px 10px;
+  }
+</style></head><body>
+<canvas id="gameCanvas"></canvas>
+<div id="mathQuestion">
+  <p id="question"></p>
+  <input type="number" id="answer">
+  <button onclick="checkAnswer()">Submit</button>
+</div>
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
-  //platforms
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-  const platforms = [
+// Game objects
+const player = {
+  x: 50,
+  y: canvas.height - 100,
+  width: 40,
+  height: 60,
+  speed: 6,
+  jumpForce: 17,
+  velocityY: 0,
+  isJumping: false,
+  jumpCount: 0,
+  maxJumps: 2
+};
+
+const platforms = [
   { x: 0, y: canvas.height - 40, width: 400, height: 40 },
   { x: 500, y: canvas.height - 40, width: 400, height: 40 },
   { x: 1000, y: canvas.height - 40, width: 400, height: 40 },
@@ -80,9 +78,6 @@
   { x: 4000, y: canvas.height - 340, width: 300, height: 20 }
 ];
 
-//holes 
-
-
 const holes = [
   { x: 400, y: canvas.height - 40, width: 80, height: 40 },
   { x: 900, y: canvas.height - 40, width: 80, height: 40 },
@@ -94,7 +89,6 @@ const holes = [
   { x: 3900, y: canvas.height - 40, width: 80, height: 40 }
 ];
 
-//island 
 const island = {
   x: 4500,
   y: canvas.height - 100,
@@ -102,7 +96,6 @@ const island = {
   height: 100
 };
 
-//trees 
 const trees = [
   { x: 150, y: canvas.height - 40, size: 80 },
   { x: 600, y: canvas.height - 40, size: 100 },
@@ -117,7 +110,6 @@ const trees = [
   { x: 4200, y: canvas.height - 40, size: 90 }
 ];
 
-//mountains 
 const mountains = [
   { x: 0, height: canvas.height * 0.6 },
   { x: canvas.width * 0.3, height: canvas.height * 0.5 },
@@ -135,7 +127,6 @@ const mountains = [
   { x: canvas.width * 3.9, height: canvas.height * 0.55 }
 ];
 
-//enemies
 const enemies = [
   { x: 600, y: canvas.height - 100, width: 40, height: 40, speed: 1.5, direction: 1, alive: true, initialX: 600, initialY: canvas.height - 100 },
   { x: 1200, y: canvas.height - 260, width: 40, height: 40, speed: 1.5, direction: 1, alive: true, initialX: 1200, initialY: canvas.height - 260 },
@@ -146,7 +137,6 @@ const enemies = [
   { x: 4200, y: canvas.height - 380, width: 40, height: 40, speed: 1.5, direction: 1, alive: true, initialX: 4200, initialY: canvas.height - 380 }
 ];
 
-//coins
 const coins = [
   { x: 300, y: canvas.height - 150, collected: false },
   { x: 800, y: canvas.height - 250, collected: false },
@@ -157,7 +147,6 @@ const coins = [
   { x: 3800, y: canvas.height - 300, collected: false },
   { x: 4400, y: canvas.height - 250, collected: false }
 ];
-
 
 // Game variables
 const gravity = 0.7;
@@ -414,6 +403,7 @@ function checkCollisions() {
     player.jumpCount = 0;
     onPlatform = true;
   }
+
   enemies.forEach(enemy => {
     if (enemy.alive) {
       if (
@@ -555,3 +545,146 @@ function drawScore() {
   ctx.fillText(`Score: ${score}`, 20, 30);
   ctx.fillText(`Level: ${currentLevel}`, 20, 60);
 }
+
+function restartGame() {
+  player.x = 50;
+  player.y = canvas.height - 100;
+  player.velocityY = 0;
+  player.isJumping = false;
+  player.jumpCount = 0;
+  cameraX = 0;
+  gameOver = false;
+  gameState = 'playing';
+  score = 0;
+  currentLevel = 1;
+  
+  enemies.forEach((enemy) => {
+    enemy.x = enemy.initialX;
+    enemy.y = enemy.initialY;
+    enemy.direction = 1;
+    enemy.alive = true;
+  });
+
+  coins.forEach((coin) => {
+    coin.collected = false;
+  });
+}
+
+function goToNextLevel() {
+  currentLevel++;
+  player.x = 50;
+  player.y = canvas.height - 100;
+  player.velocityY = 0;
+  player.isJumping = false;
+  player.jumpCount = 0;
+  cameraX = 0;
+
+  // Reset enemies
+  enemies.forEach((enemy) => {
+    enemy.x = enemy.initialX;
+    enemy.y = enemy.initialY;
+    enemy.direction = 1;
+    enemy.alive = true;
+  });
+
+  // Reset coins
+  coins.forEach((coin) => {
+    coin.collected = false;
+  });
+
+  // Increase difficulty (but less than before)
+  enemies.forEach((enemy) => {
+    enemy.speed += 0.2;
+  });
+
+  player.speed += 0.2;
+  player.jumpForce += 0.2;
+
+  // Add more platforms or change their positions
+  platforms.push({ x: Math.random() * canvas.width * 4, y: Math.random() * (canvas.height - 200) + 100, width: 200, height: 20 });
+
+  // Add more enemies (but fewer than before)
+  if (currentLevel % 2 === 0) {
+    enemies.push({
+      x: Math.random() * canvas.width * 4,
+      y: canvas.height - 100,
+      width: 40,
+      height: 40,
+      speed: 1.5 + (currentLevel - 1) * 0.2,
+      direction: 1,
+      alive: true,
+      initialX: Math.random() * canvas.width * 4,
+      initialY: canvas.height - 100
+    });
+  }
+
+  // Add more coins
+  coins.push({
+    x: Math.random() * canvas.width * 4,
+    y: Math.random() * (canvas.height - 200) + 100,
+    collected: false
+  });
+}
+
+function gameLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  drawBackground();
+  drawPlatforms();
+  drawHoles();
+  drawIsland();
+  drawTrees();
+  drawCoins();
+  
+  if (gameState === 'title') {
+    drawTitleScreen();
+  } else if (gameState === 'playing') {
+    drawPlayer();
+    drawEnemies();
+    drawScore();
+    if (!gameOver) {
+      movePlayer();
+      moveEnemies();
+      applyGravity();
+      checkCollisions();
+    } else {
+      drawGameOver();
+      if (keys['KeyR']) {
+        restartGame();
+      }
+    }
+  }
+  
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  platforms.forEach(platform => {
+    if (platform.y === canvas.height - 40) {
+      platform.y = canvas.height - 40;
+    }
+  });
+  holes.forEach(hole => {
+    hole.y = canvas.height - 40;
+  });
+  island.y = canvas.height - 100;
+  trees.forEach(tree => {
+    tree.y = canvas.height - 40;
+  });
+  mountains.forEach((mountain, index) => {
+    mountain.height = canvas.height * (0.5 + (index % 3) * 0.1);
+  });
+  enemies.forEach((enemy, index) => {
+    enemy.y = canvas.height - 100 - index * 50;
+    enemy.initialY = enemy.y;
+  });
+  coins.forEach((coin, index) => {
+    coin.y = canvas.height - 150 - index * 100;
+  });
+});
+</script>
+</body></html>
